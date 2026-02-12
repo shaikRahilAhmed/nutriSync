@@ -97,10 +97,16 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
     } catch (error: any) {
       console.error("Auth error:", error);
       
-      const errorMessage = 
-        error.message === "Invalid login credentials"
-          ? "The username or password you entered is incorrect"
-          : error.message || "An error occurred during authentication";
+      let errorMessage = error.message || "An error occurred during authentication";
+      
+      // Handle specific error cases
+      if (error.message === "Invalid login credentials") {
+        errorMessage = "The username or password you entered is incorrect";
+      } else if (error.message?.includes("rate limit") || error.message?.includes("Email rate limit exceeded")) {
+        errorMessage = "Too many attempts. Please wait a few minutes and try again.";
+      } else if (error.status === 429) {
+        errorMessage = "Rate limit exceeded. Please wait 15-30 minutes before trying again.";
+      }
       
       toast({
         title: "Error",
