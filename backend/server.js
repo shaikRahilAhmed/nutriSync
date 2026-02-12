@@ -10,7 +10,12 @@ const app = express();
 const upload = multer({ dest: "uploads/" });
 
 const corsOptions = {
-  origin: ["http://localhost:8080", "http://localhost:8081", "https://nutrisync-ai.vercel.app"], // Allow only your frontend
+  origin: [
+    "http://localhost:8080", 
+    "http://localhost:8081", 
+    "https://nutrisync-ai.vercel.app",
+    "https://nutri-sync-r.vercel.app"
+  ],
   methods: "GET,POST",
   allowedHeaders: "Content-Type,Authorization",
 };
@@ -247,4 +252,8 @@ app.post("/generate-meal-plan", async (req, res) => {
 });
 
 // server
-app.listen(5000, () => console.log("Server running on port 5000"));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+// Export for Vercel serverless
+export default app;
