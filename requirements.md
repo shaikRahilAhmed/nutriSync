@@ -1,7 +1,7 @@
 # NutriSync - Requirements Documentation
 
 ## Project Overview
-
+ vcc   c
 NutriSync is an AI-powered nutrition and health tracking web application that provides personalized insights, meal planning, and progress tracking for users looking to optimize their health and nutrition journey.
 
 ## Functional Requirements
